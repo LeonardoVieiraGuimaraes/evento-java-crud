@@ -1,45 +1,17 @@
-Skip to content
-Search or jump to…
-Pull requests
-Issues
-Codespaces
-Marketplace
-Explore
-
-@LeonardoVieiraGuimaraes
-MichelliBrito
-/
-cursospringboot
-Public
-Code
-Issues
-2
-Pull requests
-Actions
-Projects
-Security
-Insights
-cursospringboot/src/main/resources/templates/index.html
-@MichelliBrito
-MichelliBrito spring security
-Latest commit be6571f on Nov 16, 2017
-History
-1 contributor
-38 lines (30 sloc) 1.32 KB
-
 <!DOCTYPE html>
-<html xmlns:th="http://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html lang="pt-br" xmlns:th="http://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
-    <title>EventosApp</title>
-    <!--Import Google Icon Font-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-    <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css" media="screen,projection" />
 
-    <!--Let browser know website is optimized for mobile-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style/styleCss.css" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link rel="stylesheet" th:href="@{/css/styles.css}" type="text/css">
+    <link rel="shortcut icon" th:href="@{/img/favicon.ico}" type="image/x-icon">
+    <title>Aplicação de Eventos</title>
 </head>
 
 <body>
@@ -49,8 +21,8 @@ History
             <div class="nav-wrapper">
                 <a href="#" class="brand-logo">Lista de Eventos</a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <li><a href="/cadastrarEvento" class="waves-effect waves-light btn"><i
-                                class="material-icons left">add_circle_outline</i>Cadastrar evento</a></li>
+                    <li><a href="/cadastrar" class="waves-effect waves-light btn"><em
+                                class="material-icons left">add_circle_outline</em>Cadastrar</a></li>
                 </ul>
             </div>
         </nav>
