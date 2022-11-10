@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+    <link rel="stylesheet" th:href="@{/css/styles.css}" type="text/css">
+    <link rel="shortcut icon" th:href="@{/img/favicon.ico}" type="image/x-icon">
+    <title>Aplicação de Eventos</title>
+</head>
+
+<body>
+
+    <header>
+
+        <nav>
+            <div class="nav-wrapper">
+                <a href="#" class="brand-logo">Cadastro de Eventos</a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+
+                    <li> <a class="waves-effect waves-light btn" href="/"> <em
+                                class="material-icons left">format_list_bulleted</em> Lista de Eventos</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main class="container">
+
+
+        <div>
+            <form class="contanier" action="#" method="post">
+                <th:block th:include="eventos/mensagemValidacao"></th:block>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <label for="idNome">Nome</label>
+                        <input type="text" name="nome" id="idNome" placeholder="Nome">
+                    </div>
+                    <div class="input-field col s6">
+                        <label for="idLocal">Local</label>
+                        <input type="text" name="local" id="idLocal" placeholder="Local">
+                    </div>
+                    <div class="input-field col s3">
+                        <label for="idData">Data</label>
+                        <input type="date" name="data" id="idData" placeholder="Data">
+                    </div>
+                    <div class="input-field col s3">
+                        <label for="idHorario">Horário</label>
+                        <input type="time" name="horario" id="idHorario" placeholder="Horário">
+                    </div>
+                    <button class="btn waves-effect waves-light filter_list" type="submit"> Salvar </button>
+                </div>
+            </form>
+        </div>
+
+
+    </main>
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+
+</html>

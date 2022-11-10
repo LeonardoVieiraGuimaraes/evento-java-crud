@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link rel="stylesheet" th:href="@{/css/styles.css}" type="text/css">
+    <link rel="shortcut icon" th:href="@{/img/favicon.ico}" type="image/x-icon">
+    <title>Aplicação de Eventos</title>
+</head>
+
+<body>
+    <header>
+
+        <nav>
+            <div class="nav-wrapper">
+                <a href="#" class="brand-logo">Lista de Eventos</a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+
+                    <li> <a class="waves-effect waves-light btn" href="/cadastrar"> <em
+                                class="material-icons left">add_circle</em>
+                            Cadastrar Novo Evento</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main class="container">
+
+
+        <table>
+            <caption>
+                <h1>Lista de Eventos</h1>
+            </caption>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Local</th>
+                    <th>Data</th>
+                    <th>Horário</th>
+                    <th>Deletar</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="evento : ${eventos}">
+
+                    <!-- $((#mvc.url('EC#detalhesEvento').arg(0, evento.codigo)).build() -->
+                    <td> <a th:href="@{'/eventos/' + ${evento.codigo}}"><span th:text=${evento.nome}></span> </a></td>
+                    <td> <span th:text=${evento.local}></span> </td>
+                    <td> <span th:text=${evento.data}></span> </td>
+                    <td> <span th:text=${evento.horario}></span> </td>
+
+
+                    <td><a th:href="@{'/eventos/deletarEvento/' + ${evento.codigo}}"><em
+                                class="material-icons left">delete</em>
+                        </a>
+                    </td>
+
+                </tr>
+            </tbody>
+            <tfoot>
+
+            </tfoot>
+        </table>
+
+    </main>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+
+</html>
