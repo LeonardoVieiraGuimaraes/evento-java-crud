@@ -29,12 +29,12 @@ public class EventoController {
 
     @GetMapping(value = "/cadastrar")
     public String form() {
-        return "/eventos/cadastrarEvento";
+        return "cadastrarEvento";
     }
 
     @GetMapping(value = "/eventos")
     public ModelAndView listaEventos() {
-        ModelAndView mv = new ModelAndView("/eventos/listaEventos");
+        ModelAndView mv = new ModelAndView("listaEventos");
         Iterable<EventoModel> eventos = eventoRepository.findAll();
         mv.addObject("eventos", eventos);
         return mv;
@@ -56,7 +56,7 @@ public class EventoController {
     @GetMapping("eventos/{codigo}")
     public ModelAndView detalhesEventoGet(@PathVariable("codigo") long codigo) {
         EventoModel evento = eventoRepository.findByCodigo(codigo);
-        ModelAndView mv = new ModelAndView("/eventos/cadastrarConvidado");
+        ModelAndView mv = new ModelAndView("cadastrarConvidado");
         mv.addObject("evento", evento);
         Iterable<ConvidadoModel> convidados = convidadoRepository.findByEvento(evento);
         mv.addObject("convidados", convidados);
