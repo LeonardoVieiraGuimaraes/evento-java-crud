@@ -18,89 +18,84 @@ import com.projectevent.repositories.EventoRepository;
 @Controller
 public class EventoController {
 
-    // private EventoRepository eventoRepository;
-    // private ConvidadoRepository convidadoRepository;
+    private EventoRepository eventoRepository;
+    private ConvidadoRepository convidadoRepository;
 
-    // public EventoController(EventoRepository eventoRepository,
-    // ConvidadoRepository convidadoRepository) {
-    // this.eventoRepository = eventoRepository;
-    // this.convidadoRepository = convidadoRepository;
-    // }
+    public EventoController(EventoRepository eventoRepository,
+            ConvidadoRepository convidadoRepository) {
+        this.eventoRepository = eventoRepository;
+        this.convidadoRepository = convidadoRepository;
+    }
 
     @GetMapping(value = "/cadastrar")
     public String form() {
         return "/eventos/cadastrarEvento";
     }
 
-    // @PostMapping(value = "/cadastrar")
-    // public String form(@Valid EventoModel evento, BindingResult result,
-    // RedirectAttributes attributes) {
-    // if (result.hasErrors()) {
-    // attributes.addFlashAttribute("mensagem", "Verifique os Campos");
-    // return "redirect:/eventos/cadastrar";
-    // }
+    @GetMapping(value = "/eventos")
+    public ModelAndView listaEventos() {
+        ModelAndView mv = new ModelAndView("/eventos/listaEventos");
+        Iterable<EventoModel> eventos = eventoRepository.findAll();
+        mv.addObject("eventos", eventos);
+        return mv;
+    }
 
-    // eventoRepository.save(evento);
-    // attributes.addFlashAttribute("mensagem", "Evento adicinado com sucesso!!");
-    // return "redirect:/eventos/cadastrar";
-    // }
+    @PostMapping(value = "/cadastrar")
+    public String form(@Valid EventoModel evento, BindingResult result,
+            RedirectAttributes attributes) {
+        if (result.hasErrors()) {
+            attributes.addFlashAttribute("mensagem", "Verifique os Campos");
+            return "redirect:/eventos";
+        }
 
-    // @GetMapping
-    // public ModelAndView listaEventos() {
-    // ModelAndView mv = new ModelAndView("/eventos/listaEventos");
-    // Iterable<EventoModel> eventos = eventoRepository.findAll();
-    // mv.addObject("eventos", eventos);
-    // return mv;
-    // }
+        eventoRepository.save(evento);
+        attributes.addFlashAttribute("mensagem", "Evento adicinado com sucesso!!");
+        return "redirect:/eventos";
+    }
 
-    // @GetMapping("/{codigo}")
-    // public ModelAndView detalhesEventoGet(@PathVariable("codigo") long codigo) {
-    // EventoModel evento = eventoRepository.findByCodigo(codigo);
-    // ModelAndView mv = new ModelAndView("/eventos/detalhesEvento");
-    // mv.addObject("evento", evento);
-    // Iterable<ConvidadoModel> convidados =
-    // convidadoRepository.findByEvento(evento);
-    // mv.addObject("convidados", convidados);
-    // return mv;
-    // }
+    @GetMapping("eventos/{codigo}")
+    public ModelAndView detalhesEventoGet(@PathVariable("codigo") long codigo) {
+        EventoModel evento = eventoRepository.findByCodigo(codigo);
+        ModelAndView mv = new ModelAndView("/eventos/cadastrarConvidado");
+        mv.addObject("evento", evento);
+        Iterable<ConvidadoModel> convidados = convidadoRepository.findByEvento(evento);
+        mv.addObject("convidados", convidados);
+        return mv;
+    }
 
-    // @PostMapping("/{codigo}")
-    // public String detalhesEventoPost(@PathVariable("codigo") Long codigo,
-    // @Valid ConvidadoModel convidado, BindingResult result, RedirectAttributes
-    // attributes) {
+    @PostMapping("eventos/{codigo}")
+    public String detalhesEventoPost(@PathVariable("codigo") Long codigo, @Valid ConvidadoModel convidado,
+            BindingResult result, RedirectAttributes attributes) {
 
-    // if (result.hasErrors()) {
+        if (result.hasErrors()) {
+            attributes.addFlashAttribute("mensagem", "Verifique os Campos");
+            return "redirect:/eventos/{codigo}";
+        }
 
-    // attributes.addFlashAttribute("mensagem", "Verifique os Campos");
-    // return "redirect:/eventos/{codigo}";
-    // }
-    // EventoModel evento = eventoRepository.findByCodigo(codigo);
-    // convidado.setEvento(evento);
-    // convidadoRepository.save(convidado);
-    // attributes.addFlashAttribute("mensagem", "Convidado adicinado com
-    // sucesso!!");
-    // return "redirect:/eventos/{codigo}";
+        EventoModel evento = eventoRepository.findByCodigo(codigo);
+        convidado.setEvento(evento);
+        convidadoRepository.save(convidado);
+        attributes.addFlashAttribute("mensagem", "Convidado adicinado com sucesso!!");
+        return "redirect:/eventos/{codigo}";
 
-    // }
+    }
 
-    // // @Override
-    // @GetMapping("/deletarEvento/{codigo}")
-    // public String deletarEvento(@PathVariable("codigo") Long codigo) {
-    // EventoModel evento = eventoRepository.findByCodigo(codigo);
+    @GetMapping("deletarEvento/{codigo}")
+    public String deletarEvento(@PathVariable("codigo") Long codigo) {
+        EventoModel evento = eventoRepository.findByCodigo(codigo);
+        eventoRepository.delete(evento);
+        return "redirect:/eventos";
+    }
 
-    // eventoRepository.delete(evento);
-    // return "redirect:/eventos";
-    // }
+    @GetMapping("/deletarConvidado/{cpf}")
+    public String deletarConvidado(@PathVariable("cpf") String cpf) {
+        ConvidadoModel convidado = convidadoRepository.findByCpf(cpf);
+        convidadoRepository.delete(convidado);
+        EventoModel evento = convidado.getEvento();
+        long codigoLong = evento.getCodigo();
+        String codigo = "" + codigoLong;
+        return "redirect:/eventos/" + codigo;
 
-    // @GetMapping("/deletarConvidado/{cpf}")
-    // public String deletarConvidado(@PathVariable("cpf") String cpf) {
-    // ConvidadoModel convidado = convidadoRepository.findByCpf(cpf);
-    // convidadoRepository.delete(convidado);
-    // EventoModel evento = convidado.getEvento();
-    // long codigoLong = evento.getCodigo();
-    // String codigo = "" + codigoLong;
-    // return "redirect:/eventos/" + codigo;
-
-    // }
+    }
 
 }
