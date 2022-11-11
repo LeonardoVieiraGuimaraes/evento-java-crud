@@ -29,7 +29,7 @@ public class EventoController {
 
     @GetMapping(value = "/cadastrar")
     public String form() {
-        return "eventos/cadastrarEvento";
+        return "cadastrarEvento";
     }
 
     @GetMapping(value = "/eventos")
