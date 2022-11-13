@@ -93,7 +93,7 @@
 
 
 				<configuration>
-					<skipTests>true</skipTests>
+					<skipTests>false</skipTests>
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>
