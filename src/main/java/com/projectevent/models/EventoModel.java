@@ -25,7 +25,7 @@ public class EventoModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long codigo;
+    private long id;
 
     @NotEmpty
     private String nome;

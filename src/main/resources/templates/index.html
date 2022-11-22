@@ -19,10 +19,13 @@
     <header>
         <nav class="menu">
             <div class="nav-wrapper">
-                <a href="#" class="brand-logo">Lista de Eventos</a>
+                <a href="" class="brand-logo">Lista de Eventos</a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <li><a href="/cadastrar" class="waves-effect waves-light btn"><em
-                                class="material-icons left">add_circle_outline</em>Cadastrar</a></li>
+                    <li><a th:href="@{'/cadastrar'}" class="waves-effect waves-light btn"><em
+                                class="material-icons left">add_circle_outline</em>Cadastrar novo evento</a></li>
+
+                    <li><a th:href="@{'/eventos'}" class="waves-effect waves-light btn"><em
+                                class="material-icons left">format_list_bulleted</em>Lista de Eventos</a></li>
                 </ul>
             </div>
         </nav>

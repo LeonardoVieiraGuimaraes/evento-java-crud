@@ -38,6 +38,7 @@
                 <thead>
 
                     <tr>
+                        <th>Codigo</th>
                         <th>Nome</th>
                         <th>Local</th>
                         <th>Data</th>
@@ -46,6 +47,7 @@
                 </thead>
                 <tbody>
                     <tr>
+                        <td><span th:text="${evento.id}"></span></td>
                         <td><span th:text="${evento.nome}"></span></td>
                         <td><span th:text="${evento.local}"></span></td>
                         <td><span th:text="${evento.data}"></span></td>
@@ -58,12 +60,14 @@
         </div>
         <div>
             <p>Adiconar Convidados:</p>
-            <th:block th:include="mensagemValidacao"></th:block>
-            <form action="#" method="post">
+            <form th:action="@{'/cadastrarconvidado/' + ${evento.id}}" method="post">
+
+                <div th:if="${mensagem}" th:text="${mensagem}"></div>
                 <label for="idNomeConvidade">Nome do Convidado</label>
-                <input type="text" name="nomeConvidado" id="idNomeConvidade">
+                <input type="text" name="nomeConvidado" id="idNomeConvidade" th:value="${convidado?.nomeConvidado}">
                 <label for="idCPF">CPF do Convidado</label>
-                <input type="text" name="cpf" id="idCpf" placeholder="000.000.000-00" class="validate">
+                <input type="text" name="cpf" id="idCpf" placeholder="000.000.000-00" class="validate"
+                    th:value="${convidado?.cpf}">
 
                 <p>
                     <button class="btn waves-effect waves-light filter_list" type="submit"> Adicionar
@@ -80,6 +84,7 @@
                         <th>Nome do Convidado</th>
                         <th>CPF</th>
                         <th>Deletar</th>
+                        <th>Atualizar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -87,9 +92,13 @@
                         <td><span th:text="${convidado.nomeConvidado}"></span></td>
                         <td><span th:text="${convidado.cpf}"></span></td>
 
-                        <td><a th:href="@{'/deletarConvidado/' + ${convidado.cpf}}"><em
+                        <td><a th:href="@{'/deletarconvidado/' + ${convidado.cpf}}"><em
                                     class="material-icons left">delete</em>
                             </a>
+                        <td><a th:href="@{'/atualizarconvidado/' + ${evento.id} + '/' + ${convidado.cpf}}"><em
+                                    class="material-icons left">update</em>
+                            </a>
+                        </td>
                     </tr>
                 </tbody>
 

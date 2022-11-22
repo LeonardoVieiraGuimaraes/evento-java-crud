@@ -26,7 +26,7 @@
                 <a href="#" class="brand-logo">Cadastro de Eventos</a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
 
-                    <li> <a class="waves-effect waves-light btn" href="/eventos"> <em
+                    <li> <a class="waves-effect waves-light btn" th:href="@{'/eventos'}"> <em
                                 class="material-icons left">format_list_bulleted</em> Lista de Eventos</a></li>
                 </ul>
             </div>
@@ -36,24 +36,31 @@
 
 
         <div>
-            <form class="contanier" action="#" method="post">
-                <th:block th:include="mensagemValidacao"></th:block>
+            <form class="contanier" th:action="@{'/cadastrar'}" method="post">
+
+
+                <div th:if="${mensagem}" th:text="${mensagem}"></div>
                 <div class="row">
+                    <div th:if="${evento}" class="input-field col s12">
+                        <label for="id">Codigo</label>
+                        <input type="text" name="id" id="idId" placeholder="" th:value="${evento?.id}" disabled>
+                    </div>
                     <div class="input-field col s12">
                         <label for="idNome">Nome</label>
-                        <input type="text" name="nome" id="idNome" placeholder="Nome">
+                        <input type="text" name="nome" id="idNome" placeholder="Nome" th:value="${evento?.nome}">
                     </div>
                     <div class="input-field col s6">
                         <label for="idLocal">Local</label>
-                        <input type="text" name="local" id="idLocal" placeholder="Local">
+                        <input type="text" name="local" id="idLocal" placeholder="Local" th:value="${evento?.local}">
                     </div>
                     <div class="input-field col s3">
                         <label for="idData">Data</label>
-                        <input type="date" name="data" id="idData" placeholder="Data">
+                        <input type="date" name="data" id="idData" placeholder="Data" th:value="${evento?.data}">
                     </div>
                     <div class="input-field col s3">
                         <label for="idHorario">Horário</label>
-                        <input type="time" name="horario" id="idHorario" placeholder="Horário">
+                        <input type="time" name="horario" id="idHorario" placeholder="Horário"
+                            th:value="${evento?.horario}">
                     </div>
                     <button class="btn waves-effect waves-light filter_list" type="submit"> Salvar </button>
                 </div>
